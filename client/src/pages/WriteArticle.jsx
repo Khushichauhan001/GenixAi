@@ -69,5 +69,3 @@ function WriteArticle() {
 }
 
 export default WriteArticle
-
-// 2:33:00 
