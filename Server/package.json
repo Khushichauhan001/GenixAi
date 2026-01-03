@@ -2,9 +2,9 @@
   "name": "server",
   "version": "1.0.0",
   "main": "server.js",
-  "typpe": "module",
+  "type": "module",
   "scripts": {
-    "server": "nodemon server.js",
+    "server": "nodemon Server/server.js",
     "start": "node server.js"
   },
   "keywords": [],
@@ -12,13 +12,17 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@clerk/clerk-sdk-node": "^4.13.23",
+    "@clerk/express": "^1.7.58",
+    "@google/genai": "^1.34.0",
     "@neondatabase/serverless": "^1.0.2",
     "axios": "^1.13.2",
     "cloudinary": "^2.8.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
-    "express": "^5.2.1",
-    "multer": "^2.0.2"
+    "express": "^4.22.1",
+    "multer": "^2.0.2",
+    "openai": "^6.14.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.11"
