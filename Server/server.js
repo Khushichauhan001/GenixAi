@@ -46,8 +46,10 @@ import cors from "cors";
 import { clerkMiddleware } from "@clerk/express";
 import aiRouter from "./Routes/aiRoutes.js";
 import "./configs/db.js"; // AFTER env
+import connectCloudinary from "./configs/cloudinary.js";
 
 const app = express();
+await connectCloudinary();
 
 // 🔍 logger (optional but useful)
 app.use((req, res, next) => {
