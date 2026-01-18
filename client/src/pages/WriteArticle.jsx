@@ -107,11 +107,11 @@ function WriteArticle() {
           {/* <Markdown> {content}</Markdown> */}
           {typeof content === "string" && content.trim().length > 0 ? (
           <Markdown>{String(content)}</Markdown>
-) : (
-  <p className="text-gray-400 text-sm">
-    No article generated yet.
-  </p>
-)}
+           ) : (
+             <p className="text-gray-400 text-sm">
+               No article generated yet.
+             </p>
+           )}
 
           </div>
 

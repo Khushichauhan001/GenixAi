@@ -136,7 +136,7 @@ export const generateBlogTitle = async (req, res) => {
 
     res.json({
       success: true,
-      content,
+      content: String(content),
     });
   } catch (error) {
     console.error("AI CONTROLLER ERROR:", error);
