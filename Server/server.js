@@ -47,6 +47,7 @@ import { clerkMiddleware } from "@clerk/express";
 import aiRouter from "./Routes/aiRoutes.js";
 import "./configs/db.js"; // AFTER env
 import connectCloudinary from "./configs/cloudinary.js";
+import userRouter from "./Routes/userRoutes.js";
 
 const app = express();
 await connectCloudinary();
@@ -70,6 +71,7 @@ app.get("/", (req, res) => {
 
 // 🔥 AI routes
 app.use("/api/ai", aiRouter);
+app.use("/api/user", userRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

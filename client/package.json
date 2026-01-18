@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.55.0",
+    "axios": "^1.13.2",
     "lucide-react": "^0.553.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-hot-toast": "^2.6.0",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.9.6"
   },
@@ -23,6 +25,7 @@
     "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react": "^5.1.0",
     "autoprefixer": "^10.4.22",
+    "baseline-browser-mapping": "^2.9.15",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
