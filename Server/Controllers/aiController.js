@@ -257,14 +257,14 @@ export const removeImageBackground = async (req, res) => {
     console.log("BODY:", req.body);
 
     
-    const { image } = req.file;
+    const image  = req.file;    
     const { userId, plan, free_usage } = req;
     console.log("UserId:", userId, "Plan:", plan, "Free Usage:", free_usage);
-
-    if (!prompt) {
+    
+     if (!image) {
       return res.status(400).json({
         success: false,
-        message: "Prompt is required",
+        message: "Image is required",
       });
     }
 
@@ -273,7 +273,7 @@ export const removeImageBackground = async (req, res) => {
         success: false,
         message: "Feature is only for premium users",
       });
-    }
+    }   
 
 
     const {secure_url} = await cloudinary.uploader.upload(image.path, {
@@ -320,66 +320,108 @@ export const removeImageBackground = async (req, res) => {
 
 
     
-export const removeImageObject = async (req, res) => {
-  try {
-    console.log("🔥 CONTROLLER REACHED");
-    console.log("BODY:", req.body);
+// export const removeImageObject = async (req, res) => {
+//   try {
+//     console.log("🔥 CONTROLLER REACHED");
+//     console.log("BODY:", req.body);
 
-    const { object } = req.body;
-    const { image } = req.file;
-    const { userId, plan, free_usage } = req;
-    console.log("UserId:", userId, "Plan:", plan, "Free Usage:", free_usage);
+//     const { object } = req.body;
+//     const image  = req.file;
+//     const { userId, plan, free_usage } = req;
+//     console.log("UserId:", userId, "Plan:", plan, "Free Usage:", free_usage);
 
    
 
-    if (plan !== "premium" ) {
-      return res.json({
+//     if (plan !== "premium" ) {
+//       return res.json({
+//         success: false,
+//         message: "Feature is only for premium users",
+//       });
+//     }
+
+
+//     const {public_id} = await cloudinary.uploader.upload(image.path)
+
+//     const imageUrl = cloudinary.url(public_id,{
+//       transformation: [{
+//         effect: `gen_remove: ${object}`
+//       }],
+//       resource_type: 'image'
+//     })
+
+
+
+//     await sql `
+//       INSERT INTO creations (user_id, prompt, content, type )
+//       VALUES (${userId}, ${` Removed ${object} from image`}  , ${imageUrl}, 'image' )
+//     `;
+
+//     // if (plan !== "premium") {
+//     //   await clerkClient.users.updateUserMetadata(userId, {
+//     //     privateMetadata: {
+//     //       free_usage: free_usage + 1,
+//     //     },
+//     //   });
+//     // }
+
+//     res.json({
+//       success: true,
+//       content : imageUrl
+//     });
+//   } catch (error) {
+//     console.error("AI CONTROLLER ERROR:", error.message);
+//     res.status(500).json({
+//       success: false,
+//       message: error.message,
+//     });
+//   }
+// };
+
+
+
+
+
+export const removeImageObject = async (req, res) => {
+  try {
+    console.log("🔥 CONTROLLER REACHED");
+
+    const image = req.file;
+    const { object } = req.body;
+
+    if (!image) {
+      return res.status(400).json({
         success: false,
-        message: "Feature is only for premium users",
+        message: "Please upload an image first"
       });
     }
 
+    if (!object) {
+      return res.status(400).json({
+        success: false,
+        message: "Object name is required"
+      });
+    }
 
-    const {public_id} = await cloudinary.uploader.upload(image.path)
-
-    const imageUrl = cloudinary.url(public_id,{
+    // 👉 Cloudinary example
+    const result = await cloudinary.uploader.upload(image.path, {
       transformation: [{
-        effect: `gen_remove: ${object}`
-      }],
-      resource_type: 'image'
-    })
-
-
-
-    await sql `
-      INSERT INTO creations (user_id, prompt, content, type )
-      VALUES (${userId}, ${` Removed ${object} from image`}  , ${imageUrl}, 'image' )
-    `;
-
-    // if (plan !== "premium") {
-    //   await clerkClient.users.updateUserMetadata(userId, {
-    //     privateMetadata: {
-    //       free_usage: free_usage + 1,
-    //     },
-    //   });
-    // }
-
-    res.json({
-      success: true,
-      content : imageUrl
+        effect: `gen_remove:${object}`
+      }]
     });
+
+    return res.json({
+      success: true,
+      content: result.secure_url
+    });
+
   } catch (error) {
-    console.error("AI CONTROLLER ERROR:", error.message);
-    res.status(500).json({
+    console.error(error);
+    return res.status(500).json({
       success: false,
-      message: error.message,
+      message: "Failed to remove object"
     });
   }
 };
-
-
-
-
 
 
 
