@@ -37,7 +37,7 @@ function Footer() {
         </div>
     </div>
     <p className="pt-4 text-center text-xs md:text-sm pb-5">
-        Copyright 2024 © <a href="https://prebuiltui.com">GreetStack</a>. All Right Reserved.
+        Copyright 2026 © <a href="https://prebuiltui.com">Khushi Chauhan</a>. All Right Reserved.
     </p>
 </footer>
   )
